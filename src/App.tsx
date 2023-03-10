@@ -5,19 +5,26 @@ import { IPaymentData } from '@labs/gazin-payment-component/dist/types';
 import '@labs/gazin-payment-component/dist/index.css';
 import './index.css';
 import './App.css';
+import { useState } from 'react';
 
 
 function App() {
+  const [data, setData] = useState<IPaymentData | undefined>()
+  const [error, setError] = useState<PaymentError | undefined>()
+  const [fieldError, setFieldError] = useState<FieldsError | undefined>()
   const onSubmit = (data: IPaymentData) => {
     console.log('App data', data);
+    setData(data);
   };
 
   const onError = (error: PaymentError) => {
     console.log('onError: ', error);
+    setError(error)
   };
 
   const fieldsError = (error: FieldsError) => {
     console.log('fieldsError: ', error);
+    setFieldError(error)
   };
 
   const amount: IAmount = {
@@ -52,7 +59,7 @@ function App() {
   };
 
   return (
-
+    <>
       <div className='payment-container'>
         <Payment
           amount={amount}
@@ -71,6 +78,14 @@ function App() {
           }}
         />
       </div>
+      {data ? <div>RESPONSE: {JSON.stringify(data)}</div> : null}
+      <br></br>
+      {error ? <div>ERROR: {JSON.stringify(error)}</div> : null}
+      <br></br>
+      {fieldError ? <div>FIELDS ERROR: {JSON.stringify(fieldError)}</div> : null}
+    </>
+
+
   );
 }
 
