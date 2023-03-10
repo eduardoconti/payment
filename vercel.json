@@ -1,0 +1,8 @@
+{
+  "build": {
+    "env": {
+      "@labs:registry": "${NPM_CONFIG_REGISTRY}",
+      "//gitlab.com/api/v4/packages/npm/:_authToken": "${NPM_AUTH_TOKEN}"
+    }
+  }
+}
